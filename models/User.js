@@ -1,0 +1,71 @@
+var mongoose = require("mongoose")
+
+const userSchema = new mongoose.Schema({
+    role:{
+        type:String,
+        required:true,
+        trim:true,
+        min:4,
+        max:6
+    },
+    fname:{
+        type:String,
+        trim:true,
+        required:true,
+        min:6,
+        max:225
+    },
+    lname:{
+        type:String,
+        trim:true,
+        required:true,
+        min:6,
+        max:225
+    },
+    phone:{
+        type:String,
+        required:true,
+        trim:true,
+        min:9,
+        max:10
+    },
+    province:{
+        type:Number,
+        required:true,
+        trim:true,
+        min:1,
+        max:7
+    },
+    city:{
+        type:String,
+        trim:true,
+        required:true,
+        min:4,
+        max:15
+    },
+    district:{
+        type:String,
+        trim:true,
+        required:true,
+        min:5,
+        max:15
+    },
+    email:{
+        type:String,
+        trim:true,
+        max:225,
+    },
+    password:{
+        type:String,
+        trim:true,
+        required:true,
+        max:1024,
+        min:6
+    },
+    date:{
+        type:Date,
+        default:Date.now
+    }
+})
+
+module.exports = mongoose.model("User", userSchema)
