@@ -3,8 +3,9 @@ const stemmer = require("./stemming")
 const frequencyCounter = require("./tokens")
 const csv=require('csvtojson')
 const wordCount = require("./wordCount")
-const analyzer = require("./bayes")
+const bayes = require("./bayes")
+const addCount = require("./addCount")
 
-testSentence = "I am not visiting this place from now on always"
+testSentence = "How can one send eggs for egg plant? don't you have mind"
 
-wordCount(csv, frequencyCounter,removeStopwords,stemmer,analyzer,testSentence)
+wordCount(csv, frequencyCounter,removeStopwords,stemmer,bayes,testSentence,addCount)

@@ -1,23 +1,24 @@
 
-const analyzer =(sentence,data,removeStopwords,stemmer)=>{
+const bayes =(sentence,data,removeStopwords,stemmer,addCount)=>{
     
     var wordList = removeStopwords(sentence)
     var stemmedList = stemmer(wordList)
-    var len = stemmedList.length
+    var data = addCount(stemmedList,data)
+    positiveReviewScore = data.posCount/(data.posCount+data.negCount)
+    negativeReviewScore =data.negCount/(data.posCount+data.negCount)
+
     var index
-    var posValue = 0
-    var negValue = 0
-    for(index=0;index<len;index++){
-        if(data.positiveDict[stemmedList[index]] != undefined){
-            posValue += data.positiveDict[stemmedList[index]]
-        }
-        if(data.negativeDict[stemmedList[index]] != undefined){
-            negValue += data.negativeDict[stemmedList[index]]
-        }
+
+    positiveReviewScore = data.posCount/(data.posCount+data.negCount)
+    negativeReviewScore =data.negCount/(data.posCount+data.negCount)
+    for(index=0;index<stemmedList.length;index++){
+        positiveReviewScore *= data.positiveDict[stemmedList[index]]/data.posCount
+        negativeReviewScore *= data.negativeDict[stemmedList[index]]/data.negCount
+
 
     }
-    positiveReviewScore = posValue/data.posCount
-    negativeReviewScore =negValue/data.negCount
+    console.log(positiveReviewScore,negativeReviewScore);
+    
     if(positiveReviewScore>negativeReviewScore){
         console.log("Positive review");
     }
@@ -26,4 +27,4 @@ const analyzer =(sentence,data,removeStopwords,stemmer)=>{
     }
 
 }
-module.exports = analyzer
+module.exports = bayes
