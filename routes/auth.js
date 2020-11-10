@@ -41,6 +41,7 @@ router.post("/register",async (req,res)=>{
         const token = jwt.sign({_id: user._id}, process.env.TOKEN_SECRET)
         console.log(token);
         var userDetails = {
+        _id :savedUser._id,
         role:req.body.role,
         fname:req.body.fname,
         lname:req.body.lname,
@@ -92,6 +93,7 @@ router.post("/login",async (req,res)=>{
     //create and assign token
     const token = jwt.sign({_id: user._id}, process.env.TOKEN_SECRET)
     var userDetails = {
+        _id: user._id,
         role:user.role,
         fname:user.fname,
         lname:user.lname,
