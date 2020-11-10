@@ -11,7 +11,7 @@ const registerValidation = (data)=>{
         province:Joi.number().min(0).max(7).required(),
         city:Joi.string().min(4).required(),
         district:Joi.string().min(5).max(15).required(),
-        email:Joi.string().email(),
+        email:Joi.string().allow('', null),
         password:Joi.string().min(6).max(1024).required()
     })
     return schema.validate(data)

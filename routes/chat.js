@@ -14,7 +14,7 @@ router.post("/connectedfriends", async (req,res)=>{
 
     }
     catch(err){
-        res.status(400).send(err)
+        res.send({errMessage: err})
     }
     
 })
@@ -31,7 +31,7 @@ router.post("/personalchat", async (req,res)=>{
 
     }
     catch(err){
-        res.status(400).send(err)
+        res.send({errMessage: err})
     }
     
 })

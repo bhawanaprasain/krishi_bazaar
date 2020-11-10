@@ -20,7 +20,7 @@ router.post("/",verify, async (req,res)=>{
         res.send({post:savedPost})
     }
     catch(err){
-        res.status(400).send(err)
+        res.send({errMessage: err})
     }
     
 })

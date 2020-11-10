@@ -13,4 +13,20 @@ router.get("/buyeroffer",async (req,res)=>{
     })
 })
 
+router.get("/deactivateoffer/:id",async (req,res)=>{
+    await Post.findOneAndUpdate({_id: req.params.id}, {active: false}, {new: true}, (error, doc) => {
+        if(error){
+            console.log(error);
+            res.send({errMessage: error})
+        }
+        else{
+            console.log(doc);
+        }
+       
+      });
+    
+})
+
+
+
 module.exports= router
