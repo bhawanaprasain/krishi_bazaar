@@ -8,11 +8,15 @@ router.post("/",verify, async (req,res)=>{
     console.log(user, "userdetails");
     var post = new Post({
         post:req.body.post,
+        price: req.body.price,
+        quantity:req.body.quantity,
+        expiryDate:req.body.expiryDate,
         province:user.province,
         role: user.role,
         city:user.city,
         district:user.district, 
-        active:true
+        active:true,
+        userId: req.user._id
     })
     try{
         const savedPost = await post.save();

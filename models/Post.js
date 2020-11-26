@@ -8,6 +8,15 @@ const postSchema = new mongoose.Schema({
         min:15,
       
     },
+    price:{
+        type:Number,
+        required: true
+    },
+    quantity:{
+        type:Number,
+        required:true
+
+    },
     role:{
         type:String,
         required:true,
@@ -38,9 +47,17 @@ const postSchema = new mongoose.Schema({
         type:Boolean,
         required:true
     },
+    userId:{
+        type:String,
+        required:true
+    },
     date:{
         type:Date,
         default:Date.now
+    },
+    expiryDate:{
+        type:Date,
+        required:true
     }
 })
 
