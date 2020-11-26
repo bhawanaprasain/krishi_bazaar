@@ -12,7 +12,8 @@ router.post("/",verify, async (req,res)=>{
         role: user.role,
         city:user.city,
         district:user.district, 
-        active:true
+        active:true,
+        userId: req.user._id
     })
     try{
         const savedPost = await post.save();

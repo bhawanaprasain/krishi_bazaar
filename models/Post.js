@@ -38,6 +38,10 @@ const postSchema = new mongoose.Schema({
         type:Boolean,
         required:true
     },
+    userId:{
+        type:String,
+        required:true
+    },
     date:{
         type:Date,
         default:Date.now
