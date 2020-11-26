@@ -3,13 +3,13 @@ const Post = require("../models/Post")
 
 router.get("/selleroffer",async (req,res)=>{
     await Post.find({role:"seller", active:true}).then(response=>{
-        console.log({data:response})
+        res.send({data:response})
     })
 })
 
 router.get("/buyeroffer",async (req,res)=>{
     await Post.find({role:"buyer",active:true}).then(response=>{
-        console.log({data:response})
+        res.send({data:response})
     })
 })
 
@@ -20,7 +20,7 @@ router.get("/deactivateoffer/:id",async (req,res)=>{
             res.send({errMessage: error})
         }
         else{
-            console.log(doc);
+            res.send({data:doc});
         }
        
       });
