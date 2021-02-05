@@ -1,7 +1,14 @@
 var mongoose = require("mongoose")
 
 const postSchema = new mongoose.Schema({
-    post:{
+    name:{
+        type:String,
+        required:true,
+        trim:true,
+        min:15,
+      
+    },
+    description:{
         type:String,
         required:true,
         trim:true,
@@ -38,6 +45,12 @@ const postSchema = new mongoose.Schema({
         max:15
     },
     district:{
+        type:String,
+        required:true,
+        min:5,
+        max:15
+    },
+    category:{
         type:String,
         required:true,
         min:5,

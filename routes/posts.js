@@ -4,14 +4,15 @@ const Post = require("../models/Post")
 const User = require("../models/User")
 
 router.post("/",verify, async (req,res)=>{
-    var user = await User.findOne({_id:req.user_id})
-    console.log(user, "userdetails");
+    var user = await User.findOne({_id:req.user._id})
+    console.log(req.body);
     var post = new Post({
-        description:req.body.description,
-        price: req.body.price,
-        quantity:req.body.quantity,
-        category: req.body.category,
-        expiryDate:req.body.expiryDate,
+        name:req.body.product.name,
+        description:req.body.product.description,
+        price: req.body.product.price,
+        quantity:req.body.product.quantity,
+        category: req.body.product.category,
+        expiryDate:req.body.product.expiryDate,
         province:user.province,
         role: user.role,
         city:user.city,
@@ -19,6 +20,7 @@ router.post("/",verify, async (req,res)=>{
         active:true,
         userId: req.user._id
     })
+
     try{
         const savedPost = await post.save();
         console.log(savedPost);

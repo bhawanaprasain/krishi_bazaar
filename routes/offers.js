@@ -2,7 +2,8 @@ const router = require("express").Router();
 const Post = require("../models/Post")
 
 router.get("/selleroffer",async (req,res)=>{
-    await Post.find({role:"seller", active:true}).then(response=>{
+    await Post.find({role:"buyer"}).then(response=>{
+        console.log(response);
         res.send({data:response})
     })
 })
