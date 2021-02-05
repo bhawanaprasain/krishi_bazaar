@@ -26,6 +26,11 @@ router.get("/deactivateoffer/:id",async (req,res)=>{
       });
     
 })
+router.get("/filtercategory",async (req,res)=>{
+    await Post.find({category:req.body.category, active:true}).then(response=>{
+        res.send({data:response})
+    })
+})
 
 
 

@@ -4,12 +4,13 @@ const Post = require("../models/Post")
 const User = require("../models/User")
 
 router.post("/",verify, async (req,res)=>{
-    var user = await User.findOne({_id:req.user._id})
+    var user = await User.findOne({_id:req.user_id})
     console.log(user, "userdetails");
     var post = new Post({
-        post:req.body.post,
+        description:req.body.description,
         price: req.body.price,
         quantity:req.body.quantity,
+        category: req.body.category,
         expiryDate:req.body.expiryDate,
         province:user.province,
         role: user.role,
