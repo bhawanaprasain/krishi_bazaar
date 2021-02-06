@@ -22,19 +22,14 @@ router.post("/addreview",verify, async (req,res)=>{
     }
 
 })
-
-router.get("/test", (req,res)=>{
-    res.send("jbcvchvbhcg")
-})
+   
 
 router.get("/personalreview/:id",async (req,res)=>{
     await Review.findOne({userId: req.params.id}, (error, doc) => {
         if(error){
-            console.log(error);
             res.send({errMessage: error})
         }
         else{
-            console.log(doc);
             res.send({data:doc});
         }
       });
