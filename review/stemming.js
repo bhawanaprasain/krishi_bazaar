@@ -4,7 +4,7 @@ const stemmer =(wordlist)=>{
     stemmedList = []
     len = wordlist.length
     var index
-    commonNouns =["apple","apples","mango","mangoes","goods","buyer", "seller","vegetables", "vegetable", "fruit","fruits","tomatoes","tomato", "veggies"]
+    commonNouns =["apple","apples","mango","mangoes","goods","buyer", "seller","vegetables", "vegetable", "fruit","fruits","tomatoes","tomato", "veggies","farmer", "farmers", "flower, flowers", ]
     for(index=0; index<len; index++){
         
         if(!commonNouns.includes(wordlist[index])){

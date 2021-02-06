@@ -23,6 +23,10 @@ const authRoute = require("./routes/auth")
 const postRoute = require("./routes/posts")
 const offerRoute = require("./routes/offers")
 const chatRoute = require("./routes/chat")
+const reviewRoute = require("./routes/review")
+const rankingRoute = require("./routes/ranking")
+
+
 
 
 //socket
@@ -34,6 +38,8 @@ app.use('/user',authRoute)
 app.use("/posts",postRoute)
 app.use("/offers",offerRoute)
 app.use("/chat", chatRoute)
+app.use("/", reviewRoute)
+app.use("/", rankingRoute)
 
 server.listen(4000, ()=>{
     console.log("Server is up");
