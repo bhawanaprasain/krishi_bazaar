@@ -1,4 +1,4 @@
-const bayes =async (sentence,data,removeStopwords,stemmer,addCount,Review,reviewData)=>{
+const bayes =async (sentence,data,removeStopwords,stemmer,addCount,Review,reviewData,User)=>{
     var wordList = removeStopwords(sentence)
     var stemmedList = stemmer(wordList)
     var data = addCount(stemmedList,data)
@@ -13,46 +13,52 @@ const bayes =async (sentence,data,removeStopwords,stemmer,addCount,Review,review
         negativeReviewScore *= data.negativeDict[stemmedList[index]]/data.negCount
     }
     console.log(positiveReviewScore,negativeReviewScore);
-    var user = await Review.findOne({userId: reviewData.id})
+    var user = await Review.findOne({userId: reviewData.sellerId})
     if(positiveReviewScore>negativeReviewScore){
         console.log("Positive review");
         if(user){
-            await Review.updateOne({userId:reviewData.id},
+            await Review.updateOne({userId:reviewData.sellerId},
                 {$push:{review:[{description:reviewData.review,rating:reviewData.rating,customerId:reviewData.customerId}]},
                 $inc:{positiveReview: 1}})
-            console.log(await Review.findOne({userId:reviewData.id}));
+            console.log(await Review.findOne({userId:reviewData.sellerId}));
         }
         else{
+            var user = await User.findOne({_id: reviewData.sellerId})
             var data = new Review({
-                userId:reviewData.id,
+                userId:reviewData.sellerId,
                 role:reviewData.role,
+                name:user.fname + user.lname,
+                address:user.city + "," + user.district,
                 review:[{description:reviewData.review, rating: reviewData.rating,customerId:reviewData.customerId}],
                 positiveReview:1,
                 negativeReview:0
             })
            await data.save()
-           console.log(await Review.findOne({userId:reviewData.id}));
+           console.log(await Review.findOne({userId:reviewData.sellerId}));
 
         }
     }
     else{
         console.log("negative review");
         if(user){
-            await Review.updateOne({userId:reviewData.id},
+            await Review.updateOne({userId:reviewData.sellerId},
                 {$push:{review:[{description:reviewData.review,rating:reviewData.rating,customerId:reviewData.customerId}]},
                  $inc:{negativeReview: 1}})
-            console.log(await Review.findOne({userId:reviewData.id}));
+                // console.log(await Review.findOne({userId:reviewData.sellerId}));
         }
         else{
+
+            var user = await User.findOne({_id: reviewData.sellerId})
             var data = new Review({
-                userId:reviewData.id,
+                userId:reviewData.sellerId,
                 role:reviewData.role,
+                name:user.fname + user.lname,
+                address:user.city + "," + user.district,
                 review:[{description:reviewData.review,rating: reviewData.rating,customerId:reviewData.customerId}],
                 positiveReview:0,
                 negativeReview:1
             })
            await data.save()
-           console.log(await Review.findOne({userId:reviewData.id}));
         }
     }
 }

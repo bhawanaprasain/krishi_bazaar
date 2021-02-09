@@ -15,6 +15,18 @@ const reviewSchema = new mongoose.Schema({
         trim:true,
         min:5,
     },
+    name:{
+        type:String,
+        required:true,
+        trim:true,
+        min:5,
+    },
+    address:{
+        type:String,
+        required:true,
+        trim:true,
+        min:5,
+    },
     review:[{description:String,rating:Number,customerId:String}],
     
     positiveReview:{

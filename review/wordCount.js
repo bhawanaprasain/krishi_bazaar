@@ -1,5 +1,5 @@
 
-const wordCount = async (csv,frequencyCounter,removeStopwords,stemmer,bayes,testSentence,addCount,Review,reviewData)=>{
+const wordCount = async (csv,frequencyCounter,removeStopwords,stemmer,bayes,testSentence,addCount,Review,reviewData,User)=>{
     var tokens =await csv().fromFile(process.env.FILE_PATH)
     .then((json)=>{
         var positiveDict ={}
@@ -12,7 +12,7 @@ const wordCount = async (csv,frequencyCounter,removeStopwords,stemmer,bayes,test
             const stemmedList = stemmer(wordList)
              data = frequencyCounter(stemmedList,row.label,data)  
         })
-        bayes(testSentence,data,removeStopwords,stemmer,addCount,Review,reviewData)
+        bayes(testSentence,data,removeStopwords,stemmer,addCount,Review,reviewData,User)
 });
 }
 module.exports = wordCount

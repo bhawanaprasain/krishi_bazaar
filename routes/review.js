@@ -1,10 +1,13 @@
 const router = require("express").Router();
 const verify = require("./verifyToken")
 const Review = require("../models/review")
+const User = require("../models/User")
+
 const {removeStopwords,stemmer,frequencyCounter,csv,bayes,wordCount,addCount} = require("../review/nlp")
 
 router.post("/addreview",verify, async (req,res)=>{
-    var id = req.body.reviewData.id
+    var sellerId = req.body.reviewData.sellerId
+    var reviewerId = req.body.reviewData.reviewerId
     var review=req.body.reviewData.review
     var rating= 2.5
     
@@ -13,9 +16,9 @@ router.post("/addreview",verify, async (req,res)=>{
     // var rating= req.body.reviewData.rating
     var customerId=req.user._id
     var role=req.body.reviewData.role
-    var reviewData = {id,review,customerId,role,rating}
+    var reviewData = {sellerId,reviewerId,review,customerId,role,rating}
     try{
-        wordCount(csv, frequencyCounter,removeStopwords,stemmer,bayes,review,addCount,Review,reviewData)
+        wordCount(csv, frequencyCounter,removeStopwords,stemmer,bayes,review,addCount,Review,reviewData,User)
     }
     catch(err){
         res.send({errMessage: err})

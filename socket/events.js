@@ -2,7 +2,7 @@
 const  events=(io,Chat,Customer,containsUser,customers) =>{
     io.sockets.on("connection",socket=>{
         
-
+        console.log("connected");
         socket.on("sendOffer", async ({data})=>{
             customers(data, Customer,containsUser)
         })
@@ -14,6 +14,7 @@ const  events=(io,Chat,Customer,containsUser,customers) =>{
             })
             await chatMessage.save()
             var message = data.message
+            console.log(message);
             socket.emit("eachMessage", {message})
         })
 
