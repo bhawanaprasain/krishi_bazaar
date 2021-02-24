@@ -1,8 +1,8 @@
-function containsUser(obj, list) {
+function containsUser(receiverId, connectedCustomerList) {
 
     var i;
-    for (i = 0; i < list.length; i++) {
-        if (String(list[i].roomId) === String(obj)) {
+    for (i = 0; i < connectedCustomerList.length; i++) {
+        if (connectedCustomerList[i] === receiverId) {
             return true;
         }
     }

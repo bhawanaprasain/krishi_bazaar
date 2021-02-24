@@ -1,22 +1,24 @@
 
-const customers =async (data, Customer,containsUser)=>{
+const customers =async (senderId,receiverId, Customer,containsUser)=>{
     //logged in user id
     console.log("WE ARE IN BACKEND");
-    const u_id = data.id
+
+ 
     // id and name of person who creates post for buying or selling
-    const offerId = data.eachoffer.id
-    const offername= data.eachoffer.name
-    roomId = String(u_id)+'{'+String(offerId)
-    var  customers = await Customer.find({userId:u_id})
-    console.log(customers);
+    // const offerId = data.eachoffer.id
+    // const offername= data.eachoffer.name
+    roomId = senderId+'{'+receiverId
+    var  customers = await Customer.findOne({userId:senderId})
+    console.log(customers,"check");
         
-    if(customers.length==1){
-        var connectedCustomerList = customers[0].connectedCustomer
-        index =containsUser(roomId,connectedCustomerList)
+    if(customers){
+        var connectedCustomerList = customers.connectedCustomerId
+        console.log(connectedCustomerList,"list");
+        index =containsUser(receiverId,connectedCustomerList)
         if(index == false)
             {   
                 console.log("NEW CONNECTION");
-               await Customer.updateOne({userId:u_id},{$push:{connectedCustomer:{name:offername,roomId:roomId}}})
+               await Customer.updateOne({userId:senderId},{$push:{connectedCustomerId:receiverId}})
             }
         else{
             console.log("ALREADY CONNECTED");
@@ -24,12 +26,14 @@ const customers =async (data, Customer,containsUser)=>{
     }
     else {
         console.log("NEW ENTRY");
+        console.log(senderId,receiverId);
         var newCustomer = new Customer({
-            userId:u_id,
-            connectedCustomer:{name:offername,roomId:roomId}
+            userId:senderId,
+            connectedCustomerId:receiverId,
+            connectedRoomId: roomId
         })
+        console.log(newCustomer);
         await newCustomer.save()
-
     }
            
 }
