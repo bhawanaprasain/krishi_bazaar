@@ -64,10 +64,13 @@ const postSchema = new mongoose.Schema({
         type:String,
         required:true
     },
-    date:{
-        type:Date,
-        default:Date.now
-    },
+  posted_date:{
+    type:Date,
+    required:true,
+    default:Date.now
+
+},
+
     expiryDate:{
         type:Date,
         required:true

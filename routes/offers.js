@@ -2,7 +2,14 @@ const router = require("express").Router();
 const Post = require("../models/Post")
 
 router.get("/selleroffer",async (req,res)=>{
-    await Post.find({role:"seller"}).then(response=>{
+    var date = new Date()
+    var lastWeek = date.getFullYear()+"-"+date.getUTCMonth()+"-"+date.getUTCDate()
+    await Post.find({
+        posted_date: {
+            $gte: new Date(new Date(lastWeek).setHours(00, 00, 00)),
+            $lt: new Date().setHours(23, 59, 59)
+             }
+    }).then(response=>{
         // console.log(response);
         res.send({data:response})
     })
