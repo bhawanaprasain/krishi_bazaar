@@ -6,6 +6,7 @@ router.get("/selleroffer",async (req,res)=>{
     var day = date.getUTCDate()
     if(day>7){day=day-7}
     var lastWeek = date.getFullYear()+"-"+date.getUTCMonth()+"-"+day
+    var lastWeek = date.getFullYear()+"-"+date.getUTCMonth()+"-"+date.getUTCDate()
     await Post.find({
         posted_date: {
             $gte: new Date(new Date(lastWeek).setHours(00, 00, 00)),
