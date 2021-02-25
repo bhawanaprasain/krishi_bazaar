@@ -42,5 +42,17 @@ router.get("/filtercategory",async (req,res)=>{
         res.send({data:response})
     })
 })
+router.post("/updateoffer",async (req,res)=>{
+    var price = parseInt(req.body.price);
+    var quantity = parseInt(req.body.quantity)
+    var id =  req.body._id
+    var post = await Post.findOne({_id :id})
+    if(post !== null && post.quantity > quantity){
+        await Post.updateOne({_id:id},{$inc:{quantity:-quantity}})
+    }
+    else if(post){
+        await Post.findByIdAndDelete(id)
+    }
+})
 
 module.exports= router
