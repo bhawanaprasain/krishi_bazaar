@@ -7,12 +7,15 @@ const  events=(io,Chat,Customer,containsUser,customers) =>{
         })
 
         socket.on("sendOffer", async ({senderId,receiverId})=>{
-            io.join(senderId+'{'+receiverId)
+            // io.join(senderId+'{'+receiverId)
 
             // console.log(senderId,receiverId);
             customers(senderId,receiverId, Customer,containsUser)
         })
-        
+        socket.on("fetchmessages",async(data,callback)=>{
+            var allMessages = await Chat.find({roomId:data.roomId})
+            callback({data:allMessages})
+        })
 
         socket.on("sendSingleMessage", async (data,callback)=>{
             var message = data.message
@@ -32,10 +35,13 @@ const  events=(io,Chat,Customer,containsUser,customers) =>{
                 senderId:senderId,
                 receiverId:receiverId,
                 roomId : roomId,
-                message:message
+                message:message,
+                role:role
             })
             await chatMessage.save()
-            socket.broadcast.emit(roomId,{message})
+            socket.broadcast.emit(roomId,{message,role})
+            // console.log(await Chat.find({roomId:roomId}), "previous chats stored in database");
+
             callback({data:message})
         })
 

@@ -3,7 +3,7 @@ const Post = require("../models/Post")
 
 router.get("/selleroffer",async (req,res)=>{
     await Post.find({role:"seller"}).then(response=>{
-        console.log(response);
+        // console.log(response);
         res.send({data:response})
     })
 })

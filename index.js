@@ -3,7 +3,11 @@ const app = express()
 const dotenv = require("dotenv")
 const mongoose = require("mongoose")
 const server = require("http").createServer(app)
-const io = require("socket.io").listen(server)
+const io = require('socket.io')(server,{
+    cors: {
+        origin: "http://localhost:3000",
+        methods: ["GET", "POST"]
+      }});
 const cors = require("cors")
 
 dotenv.config()
