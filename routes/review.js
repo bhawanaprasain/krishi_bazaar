@@ -14,6 +14,7 @@ router.post("/addreview",verify, async (req,res)=>{
     console.log(review,"tough");
 
     // var rating= req.body.reviewData.rating
+    //customerId person who gives review //reviewer
     var customerId=req.user._id
     var role=req.body.reviewData.role
     var reviewData = {sellerId,reviewerId,review,customerId,role,rating}

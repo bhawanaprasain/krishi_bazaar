@@ -24,12 +24,17 @@ const bayes =async (sentence,data,removeStopwords,stemmer,addCount,Review,review
         }
         else{
             var user = await User.findOne({_id: reviewData.sellerId})
+            console.log(reviewData);
+            var description = reviewData.review
+            var rating =reviewData.rating
+            var customerId = reviewData.customerId
+            var name = reviewData.name
             var data = new Review({
                 userId:reviewData.sellerId,
                 role:reviewData.role,
                 name:user.fname + user.lname,
                 address:user.city + "," + user.district,
-                review:[{description:reviewData.review, rating: reviewData.rating,customerId:reviewData.customerId}],
+                review:[{description:description, rating: rating,customerId:customerId,name:name}],
                 positiveReview:1,
                 negativeReview:0
             })

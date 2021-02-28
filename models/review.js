@@ -27,7 +27,7 @@ const reviewSchema = new mongoose.Schema({
         trim:true,
         min:5,
     },
-    review:[{description:String,rating:Number,customerId:String}],
+    review:[{description:String,rating:Number,customerId:String,name:String}],
     
     positiveReview:{
         type:Number,
