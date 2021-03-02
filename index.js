@@ -30,6 +30,8 @@ const chatRoute = require("./routes/chat")
 const reviewRoute = require("./routes/review")
 const rankingRoute = require("./routes/ranking")
 const profileRoute = require("./routes/profile")
+const marketRoute = require("./routes/market")
+
 
 
 
@@ -47,6 +49,8 @@ app.use("/chat", chatRoute)
 app.use("/", reviewRoute)
 app.use("/", rankingRoute)
 app.use("/", profileRoute)
+app.use("/", marketRoute)
+
 
 
 server.listen(4000, ()=>{
