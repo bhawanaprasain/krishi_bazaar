@@ -5,8 +5,8 @@ const Joi = require("@hapi/joi")
 const registerValidation = (data)=>{
     const schema =Joi.object({
         role:Joi.string().min(4).max(6).required(),
-        fname:Joi.string().min(6).max(225).required(),
-        lname:Joi.string().min(6).max(225).required(),
+        fname:Joi.string().min(3).max(225).required(),
+        lname:Joi.string().min(3).max(225).required(),
         phone:Joi.string().min(9).max(10).required(),
         province:Joi.number().min(0).max(7).required(),
         city:Joi.string().min(4).required(),

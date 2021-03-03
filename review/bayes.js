@@ -17,8 +17,9 @@ const bayes =async (sentence,data,removeStopwords,stemmer,addCount,Review,review
     if(positiveReviewScore>negativeReviewScore){
         console.log("Positive review");
         if(user){
+            console.log(reviewData.name,"the name of peerson who gave review");
             await Review.updateOne({userId:reviewData.sellerId},
-                {$push:{review:[{description:reviewData.review,rating:reviewData.rating,customerId:reviewData.customerId}]},
+                {$push:{review:[{description:reviewData.review,rating:reviewData.rating,customerId:reviewData.customerId,name:reviewData.name}]},
                 $inc:{positiveReview: 1}})
             console.log(await Review.findOne({userId:reviewData.sellerId}));
         }
@@ -47,7 +48,7 @@ const bayes =async (sentence,data,removeStopwords,stemmer,addCount,Review,review
         console.log("negative review");
         if(user){
             await Review.updateOne({userId:reviewData.sellerId},
-                {$push:{review:[{description:reviewData.review,rating:reviewData.rating,customerId:reviewData.customerId}]},
+                {$push:{review:[{description:reviewData.review,rating:reviewData.rating,customerId:reviewData.customerId,name:reviewData.name}]},
                  $inc:{negativeReview: 1}})
                 // console.log(await Review.findOne({userId:reviewData.sellerId}));
         }
@@ -59,7 +60,7 @@ const bayes =async (sentence,data,removeStopwords,stemmer,addCount,Review,review
                 role:reviewData.role,
                 name:user.fname + user.lname,
                 address:user.city + "," + user.district,
-                review:[{description:reviewData.review,rating: reviewData.rating,customerId:reviewData.customerId}],
+                review:[{description:reviewData.review,rating: reviewData.rating,customerId:reviewData.customerId,name:reviewData.name}],
                 positiveReview:0,
                 negativeReview:1
             })

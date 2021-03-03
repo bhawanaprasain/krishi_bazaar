@@ -10,14 +10,14 @@ router.post("/addreview",verify, async (req,res)=>{
     var reviewerId = req.body.reviewData.reviewerId
     var review=req.body.reviewData.review
     var rating= 2.5
-    
+    var name = req.body.reviewData.name
     console.log(review,"tough");
 
     // var rating= req.body.reviewData.rating
     //customerId person who gives review //reviewer
     var customerId=req.user._id
     var role=req.body.reviewData.role
-    var reviewData = {sellerId,reviewerId,review,customerId,role,rating}
+    var reviewData = {sellerId,reviewerId,review,customerId,role,rating,name}
     try{
         wordCount(csv, frequencyCounter,removeStopwords,stemmer,bayes,review,addCount,Review,reviewData,User)
     }

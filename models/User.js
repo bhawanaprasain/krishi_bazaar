@@ -12,14 +12,14 @@ const userSchema = new mongoose.Schema({
         type:String,
         trim:true,
         required:true,
-        min:6,
+        min:3,
         max:225
     },
     lname:{
         type:String,
         trim:true,
         required:true,
-        min:6,
+        min:3,
         max:225
     },
     phone:{
